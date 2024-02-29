@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script id="vertex-shader" type="x-shader/x-vertex">
+attribute vec4 vPosition;
+attribute vec4 vNormal;
+uniform mat4 mModel;
+uniform mat4 mView;
+uniform mat4 mProjection;
+varying vec4 fNormal;
+void main(){
+    gl_Position = mProjection * mView * mModel * vPosition;
+    fNormal = vNormal;
+    
+}
+</script>
+<script id="fragment-shader" type="x-shader/x-fragment">
+precision mediump float;
+uniform vec4 color;
+uniform float modo;
+varying vec4 fNormal;
+void main() {
+    if(modo == 0.0){
+        gl_FragColor = color;
+    }else{
+        gl_FragColor = abs(fNormal);
+    }
+}
+</script>
+<script type="text/javascript" src="Common/webgl-utils.js"></script>
+<script type="text/javascript" src="Common/initShaders.js"></script>
+<script type="text/javascript" src="Common/MV.js"></script>
+<script type="text/javascript" src="Common/cube.js"></script>
+<script type="text/javascript" src="Common/sphere.js"></script>
+<script type="text/javascript" src="Common/cylinder.js"></script>
+<script type="text/javascript" src="Common/torus.js"></script>
+<script type="text/javascript" src="carrinha.js"></script>
+<script type="text/javascript" src="paraboloide.js"></script>
+</head>
+<body>
+    <div>
+    <title>Carrinha</title>
+    <canvas id="gl-canvas" width="800" height="800">
+        Oops... your browser doesn't support the HTML5 canvas element"
+    </canvas>
+</div>
+</body>
+</html>
